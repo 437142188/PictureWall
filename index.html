@@ -43,8 +43,8 @@
 			}
 
 			.element {
-				width: 100px;/* 120 160 */
-				height: 100px;
+				width: 150px;/* 120 160 */
+				height: 150px;
 				box-shadow: 0px 0px 12px rgba(0,255,255,0.5);
 				border: 1px solid rgba(127,255,255,0.25);
 				text-align: center;
@@ -56,8 +56,8 @@
 				border: 1px solid rgba(127,255,255,0.75);
 			}
 				.element img{
-					width:100px;
-					height:100px;
+					width:150px;
+					height:150px;
 				}
 
 				.element .number {
@@ -255,8 +255,10 @@
 		            table[i] = personArray[i];
 		            table[i].src = personArray[i].thumb_image;
 		        } 
-		        table[i].p_x = i % 20 + 1;
-		        table[i].p_y = Math.floor(i / 20) + 1;
+		        // table[i].p_x = i % 20 + 1;
+				// table[i].p_y = Math.floor(i / 20) + 1;
+				table[i].p_x = i % 10 + 1;	// 修改此处设置table的行显示照片数
+		        table[i].p_y = Math.floor(i / 10) + 1;// 修改此处设置table的列显示照片数
 		    }
 
 
@@ -437,8 +439,8 @@
 					var object = new THREE.Object3D();
 					// object.position.x = ( table[ i + 3 ] * 140 ) - 1330;
 					// object.position.y = - ( table[ i + 4 ] * 180 ) + 990;
-					object.position.x = ( table[ i ].p_x * 140 ) - 1330;
-					object.position.y = - ( table[ i ].p_y * 180 ) + 990;
+					object.position.x = ( table[ i ].p_x * 210 ) - 1330;
+					object.position.y = - ( table[ i ].p_y * 270 ) + 990;
 
 					targets.table.push( object );
 
@@ -475,8 +477,11 @@
 
 				for ( var i = 0, l = objects.length; i < l; i ++ ) {
 
-					var theta = i * 0.175 + Math.PI;
-					var y = - ( i * 5 ) + 450;
+					// var theta = i * 0.175 + Math.PI;
+					// var y = - ( i * 5 ) + 450;
+					var theta = i * 0.225 + Math.PI;
+					var y = - ( i * 7 ) + 450;
+					
 
 					var object = new THREE.Object3D();
 
@@ -523,22 +528,22 @@
 				controls.addEventListener( 'change', render );
 
 				// 自动更换
-				var ini = 0;
-				setInterval(function(){
-					ini = ini >= 3 ? 0 : ini;
-					++ini;
-					switch(ini){
-						case 1:
-							transform( targets.sphere, 1000 );
-						break;
-						case 2:
-							transform( targets.helix, 1000 );
-						break;
-						case 3:
-							transform( targets.grid, 1000 );
-						break;
-					}	
-				},8000);
+				// var ini = 0;
+				// setInterval(function(){
+				// 	ini = ini >= 3 ? 0 : ini;
+				// 	++ini;
+				// 	switch(ini){
+				// 		case 1:
+				// 			transform( targets.sphere, 1000 );
+				// 		break;
+				// 		case 2:
+				// 			transform( targets.helix, 1000 );
+				// 		break;
+				// 		case 3:
+				// 			transform( targets.grid, 1000 );
+				// 		break;
+				// 	}	
+				// },8000);
 
 				var button = document.getElementById( 'table' );
 				button.addEventListener( 'click', function ( event ) {
@@ -611,7 +616,7 @@
 
 				// 让场景通过x轴或者y轴旋转  & z
 				// scene.rotation.x += 0.011;
-				scene.rotation.y += 0.001; // 修改此处加快/减慢旋转速度
+				scene.rotation.y += 0.0005; // 修改此处加快/减慢旋转速度
 
 				requestAnimationFrame( animate );
 
